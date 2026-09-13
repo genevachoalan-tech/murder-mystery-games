@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>诡案录 · 剧本杀游戏合集</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+    background: #0a0a0f;
+    color: #e0e0e0;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  .bg-fog {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(ellipse at 50% 0%, #1a1a2e 0%, #0a0a0f 70%);
+    z-index: -1;
+  }
+  .container { max-width: 1100px; margin: 0 auto; padding: 60px 20px; }
+  .header { text-align: center; margin-bottom: 60px; }
+  .header h1 {
+    font-size: 3em; font-weight: 300; letter-spacing: 12px;
+    color: #c9a96e; text-shadow: 0 0 30px rgba(201,169,110,0.3);
+    margin-bottom: 16px;
+  }
+  .header .subtitle {
+    font-size: 1.1em; color: #888; letter-spacing: 4px;
+  }
+  .divider {
+    width: 120px; height: 1px; margin: 30px auto;
+    background: linear-gradient(90deg, transparent, #c9a96e, transparent);
+  }
+  .games-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px; margin-bottom: 60px;
+  }
+  .game-card {
+    background: linear-gradient(145deg, #14141f, #0f0f18);
+    border: 1px solid #2a2a3a; border-radius: 12px;
+    padding: 36px 28px; cursor: pointer;
+    transition: all 0.4s ease; position: relative; overflow: hidden;
+    text-decoration: none; color: inherit; display: block;
+  }
+  .game-card::before {
+    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px;
+    background: linear-gradient(90deg, transparent, #c9a96e, transparent);
+    opacity: 0; transition: opacity 0.4s;
+  }
+  .game-card:hover {
+    transform: translateY(-6px);
+    border-color: #c9a96e;
+    box-shadow: 0 20px 50px rgba(201,169,110,0.15);
+  }
+  .game-card:hover::before { opacity: 1; }
+  .game-icon {
+    font-size: 2.5em; margin-bottom: 16px; display: block;
+  }
+  .game-title {
+    font-size: 1.5em; color: #c9a96e; margin-bottom: 8px;
+    letter-spacing: 2px;
+  }
+  .game-tag {
+    display: inline-block; padding: 3px 12px; border-radius: 20px;
+    font-size: 0.75em; margin-bottom: 16px;
+    background: rgba(201,169,110,0.1); color: #c9a96e;
+    border: 1px solid rgba(201,169,110,0.3);
+  }
+  .game-desc {
+    font-size: 0.9em; color: #999; line-height: 1.8; margin-bottom: 20px;
+  }
+  .game-meta {
+    display: flex; gap: 16px; font-size: 0.8em; color: #666;
+    border-top: 1px solid #222; padding-top: 16px;
+  }
+  .game-meta span { display: flex; align-items: center; gap: 4px; }
+  .enter-btn {
+    display: inline-block; margin-top: 20px; padding: 10px 28px;
+    background: transparent; border: 1px solid #c9a96e; color: #c9a96e;
+    border-radius: 6px; font-size: 0.9em; letter-spacing: 2px;
+    transition: all 0.3s; cursor: pointer;
+  }
+  .game-card:hover .enter-btn {
+    background: #c9a96e; color: #0a0a0f;
+  }
+  .features {
+    text-align: center; margin-top: 40px; padding: 40px;
+    background: rgba(20,20,31,0.5); border-radius: 12px;
+    border: 1px solid #1e1e2e;
+  }
+  .features h3 {
+    color: #c9a96e; font-size: 1.3em; margin-bottom: 24px;
+    letter-spacing: 4px; font-weight: 400;
+  }
+  .feature-list {
+    display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;
+  }
+  .feature-item {
+    text-align: center; max-width: 200px;
+  }
+  .feature-item .icon { font-size: 2em; margin-bottom: 10px; }
+  .feature-item .label { font-size: 0.9em; color: #aaa; }
+  .footer {
+    text-align: center; margin-top: 60px; padding-top: 30px;
+    border-top: 1px solid #1a1a2a; color: #555; font-size: 0.8em;
+  }
+  .online-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 4px 12px; border-radius: 20px; font-size: 0.75em;
+    background: rgba(76,175,80,0.1); color: #81c784;
+    border: 1px solid rgba(76,175,80,0.3); margin-left: 10px;
+  }
+  .online-badge .dot {
+    width: 6px; height: 6px; border-radius: 50%; background: #81c784;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+</style>
+</head>
+<body>
+<div class="bg-fog"></div>
+<div class="container">
+  <div class="header">
+    <h1>诡 案 录</h1>
+    <div class="subtitle">剧本杀 · 沉浸式推理游戏合集</div>
+    <div class="divider"></div>
+    <div style="margin-top:10px;">
+      <span class="online-badge"><span class="dot"></span>实时联机已就绪</span>
+    </div>
+  </div>
+
+  <div class="games-grid">
+    <a class="game-card" href="诡案录-雾隐城.html">
+      <span class="game-icon">🏙️</span>
+      <div class="game-title">诡案录 · 雾隐城</div>
+      <span class="game-tag">现代 · 悬疑</span>
+      <div class="game-desc">
+        1999年雾隐城精神病院大火，七人死亡，官方结论：意外失火。
+        三十年后，四个各怀秘密的人被召集至此——你们中有人知道，那不是意外。
+      </div>
+      <div class="game-meta">
+        <span>👥 4人</span>
+        <span>⏱ 120分钟</span>
+        <span>🔍 硬核推理</span>
+      </div>
+      <div class="enter-btn">进入游戏 →</div>
+    </a>
+
+    <a class="game-card" href="焚心录-慈安劫.html">
+      <span class="game-icon">🏯</span>
+      <div class="game-title">焚心录 · 慈安劫</div>
+      <span class="game-tag">古风 · 复仇</span>
+      <div class="game-desc">
+        十五年前慈安寺大火，全寺僧众无一生还。十五年后，连环命案再起，
+        死者皆与当年那场火有关。四个被命运纠缠的人，谁是复仇者，谁是清道夫？
+      </div>
+      <div class="game-meta">
+        <span>👥 4人</span>
+        <span>⏱ 150分钟</span>
+        <span>⚔️ 身份博弈</span>
+      </div>
+      <div class="enter-btn">进入游戏 →</div>
+    </a>
+
+    <a class="game-card" href="烬楼·七层.html">
+      <span class="game-icon">🏢</span>
+      <div class="game-title">烬楼 · 七层</div>
+      <span class="game-tag">现代 · 恐怖</span>
+      <div class="game-desc">
+        永安楼702室，四封写给你们的信。1999年的火，2016年的人，
+        还有今晚——谁也别想走。七层楼，七桩案，层层递进，步步惊魂。
+      </div>
+      <div class="game-meta">
+        <span>👥 4人</span>
+        <span>⏱ 180分钟</span>
+        <span>👻 恐怖沉浸</span>
+      </div>
+      <div class="enter-btn">进入游戏 →</div>
+    </a>
+  </div>
+
+  <div class="features">
+    <h3>联 机 特 性</h3>
+    <div class="feature-list">
+      <div class="feature-item">
+        <div class="icon">🔗</div>
+        <div class="label">房间码联机<br>创建/加入实时房间</div>
+      </div>
+      <div class="feature-item">
+        <div class="icon">📡</div>
+        <div class="label">进度同步<br>线索/阶段实时共享</div>
+      </div>
+      <div class="feature-item">
+        <div class="icon">💬</div>
+        <div class="label">实时聊天<br>房间内文字通讯</div>
+      </div>
+      <div class="feature-item">
+        <div class="icon">👻</div>
+        <div class="label">同步惊吓<br>Jump Scare全员触发</div>
+      </div>
+      <div class="feature-item">
+        <div class="icon">🔄</div>
+        <div class="label">断线重连<br>掉线恢复游戏进度</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>诡案录系列 · 支持实时联机与离线单机双模式</p>
+    <p style="margin-top:8px;">建议使用 Chrome / Edge 浏览器获得最佳体验</p>
+  </div>
+</div>
+</body>
+</html>
