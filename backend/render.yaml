@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: script-murder-online-server
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
